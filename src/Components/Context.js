@@ -8,7 +8,6 @@ const noteAndFolderContext = React.createContext({
     // folder? how do we create the context of sending a single folder object
     // note? how do we create the context of sending a single note object
     // onClickCancel? But if we are already passing down the routeProps, do we need to send down the method?
-    routeProps: {},
     folders: [],
     notes: [],
     deleteItem: () => {}

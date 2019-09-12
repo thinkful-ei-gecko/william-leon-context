@@ -79,7 +79,7 @@ export default class App extends Component {
 
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <div className="app">
         <Header />
@@ -93,27 +93,15 @@ export default class App extends Component {
               <Route
                 exact
                 path="/"
-                render={routeProps => (
-                  <FolderList
-                    routeProps={routeProps}
-                  />
-                )}
+                component={FolderList}
               />
               <Route
                 path="/folder/:folderId"
-                render={routeProps => (
-                  <FolderList
-                    routeProps={routeProps}
-                  />
-                )}
+                component={FolderList}
               />
               <Route
                 path="/note/:noteId"
-                render={routeProps => (
-                  <FolderDetailedView
-                    routeProps={routeProps}
-                  />
-                )}
+                component={FolderDetailedView}
               />
               <Route component={NotFound} />
             </Switch>
@@ -123,27 +111,15 @@ export default class App extends Component {
               <Route
                 exact
                 path="/"
-                render={routeProps => (
-                  <NoteList
-                    routeProps={routeProps}
-                  />
-                )}
+                component={NoteList}
               />
               <Route
                 path="/note/:noteId"
-                render={routeProps => (
-                  <NoteDetailedView
-                    routeProps={routeProps}
-                  />
-                )}
+                component={NoteDetailedView}
               />
               <Route
                 path="/folder/:folderId"
-                render={routeProps => (
-                  <NoteList
-                    routeProps={routeProps}
-                  />
-                )}
+                component={NoteList}
               />
               <Route component={NotFound} />
             </Switch>

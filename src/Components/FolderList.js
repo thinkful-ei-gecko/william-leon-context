@@ -8,7 +8,6 @@ export default class FolderList extends Component {
     const folderItems = this.context.folders.map(folder =>
       <FolderItem
         folder={folder}
-        routeProps={this.props.routeProps}
       />);
     return (
       <li className="sidebar__folder-list">
