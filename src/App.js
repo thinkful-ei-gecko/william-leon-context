@@ -15,7 +15,6 @@ import Context from './Components/Context';
 export default class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       store: {folders: [], notes: []}
     };
