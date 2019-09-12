@@ -17,11 +17,45 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      store: props.store
+      store: {folders: [], notes: []}
     };
   }
 
+  componentDidMount() {
+    let folders = [];
+    let notes = [];
+    fetch('http://localhost:9090/folders')
+      .then(response => {
+        if(response.ok) {
+          return response.json();
+        }
+        throw new Error('Something went wrong');
+      })
+      .then(responseJson => {
+        // console.log(responseJson);
+        folders = responseJson;
+        return fetch('http://localhost:9090/notes')
+      })
+        .then(response => {
+          if(response.ok) {
+            return response.json();
+          }
+          throw new Error('Something went wrong');
+        })
+        .then(responseJson => {
+          notes = responseJson;
+          this.setState({
+            store: {folders, notes: responseJson}
+          })
+        })
+        .catch(err => {
+          throw new Error(`Err: ${err.message}`);
+        })
+  }
+
+
   render() {
+    console.log(this.state);
     return (
       <div className="app">
         <Header />
@@ -36,7 +70,6 @@ export default class App extends Component {
                 path="/"
                 render={routeProps => (
                   <FolderList
-                    folders={this.state.store.folders}
                     routeProps={routeProps}
                   />
                 )}
@@ -45,7 +78,6 @@ export default class App extends Component {
                 path="/folder/:folderId"
                 render={routeProps => (
                   <FolderList
-                    folders={this.state.store.folders}
                     routeProps={routeProps}
                   />
                 )}
@@ -68,7 +100,6 @@ export default class App extends Component {
                 path="/"
                 render={routeProps => (
                   <NoteList
-                    notes={this.state.store.notes}
                     routeProps={routeProps}
                   />
                 )}
