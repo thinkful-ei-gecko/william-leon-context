@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default class NoteItem extends Component {
     render() {
+        console.log(this.props.routeProps);
       const { id, name, modified, folderId, content } = this.props.note;
         return (
             <div className="main__note-item" key={id}>

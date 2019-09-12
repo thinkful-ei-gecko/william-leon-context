@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import FolderItem from './FolderItem'
+import noteAndFolderContext from './Context'
 
 export default class FolderList extends Component {
+  static contextType = noteAndFolderContext;
   render() {
-    const folderItems = this.props.folders.map(folder =>
+    const folderItems = this.context.folders.map(folder =>
       <FolderItem
         folder={folder}
         routeProps={this.props.routeProps}

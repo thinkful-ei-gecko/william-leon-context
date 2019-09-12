@@ -26,7 +26,6 @@ export default class App extends Component {
       <div className="app">
         <Header />
         <Context.Provider value={{
-           routeProps: routeProps,
            folders: this.state.store.folders,
            notes: this.state.store.notes
         }}>
@@ -55,15 +54,7 @@ export default class App extends Component {
                 path="/note/:noteId"
                 render={routeProps => (
                   <FolderDetailedView
-                    folder={this.state.store.folders.find(
-                      folder =>
-                        folder.id ===
-                        this.state.store.notes.find(
-                          note => note.id === routeProps.match.params.noteId
-                        ).folderId
-                    )}
                     routeProps={routeProps}
-                    onClickCancel={() => routeProps.history.goBack()}
                   />
                 )}
               />
@@ -86,9 +77,6 @@ export default class App extends Component {
                 path="/note/:noteId"
                 render={routeProps => (
                   <NoteDetailedView
-                    note={this.state.store.notes.find(
-                      note => note.id === routeProps.match.params.noteId
-                    )}
                     routeProps={routeProps}
                   />
                 )}
@@ -97,9 +85,6 @@ export default class App extends Component {
                 path="/folder/:folderId"
                 render={routeProps => (
                   <NoteList
-                    notes={this.state.store.notes.filter(
-                      note => note.folderId === routeProps.match.params.folderId
-                    )}
                     routeProps={routeProps}
                   />
                 )}

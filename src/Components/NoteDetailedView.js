@@ -7,8 +7,8 @@ export default class NoteDetailedView extends Component {
 
 
     render() {
-        console.log(this.context);
-        const { id, name, modified, folderId, content } = this.props.note;
+        let note = this.context.notes.find(note => note.id === this.props.routeProps.match.params.noteId);
+        const { id, name, modified, folderId, content } = note;
         return (
             <div className="main__note-detailed-view" key={id}>
             <span>{name}</span>
