@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Context from './Context';
+import noteAndFolderContext from './Context'
 
 export default class NoteDetailedView extends Component {
-    static contextType = Context;
+    static contextType = noteAndFolderContext;;
 
 
     render() {
@@ -14,7 +14,7 @@ export default class NoteDetailedView extends Component {
             <span>{name}</span>
             <span>{modified}</span>
             <Link to='/'>
-                    <button type="button">Delete note</button>
+                    <button type="button" onClick={() => this.context.deleteButton(note)}>Delete note</button>
             </Link>
             <p>{content}</p>
         </div>

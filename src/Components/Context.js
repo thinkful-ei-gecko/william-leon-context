@@ -11,9 +11,7 @@ const noteAndFolderContext = React.createContext({
     routeProps: {},
     folders: [],
     notes: [],
-    folder: {},
-    note: {},
-    onClickCancel: () => {}
+    deleteItem: () => {}
 })
 
 export default noteAndFolderContext

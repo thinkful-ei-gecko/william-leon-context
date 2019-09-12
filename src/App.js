@@ -21,7 +21,7 @@ export default class App extends Component {
     };
   }
 
-  componentDidMount() {
+  getAPI = () => {
     let folders = [];
     let notes = [];
     fetch('http://localhost:9090/folders')
@@ -53,6 +53,30 @@ export default class App extends Component {
         })
   }
 
+  componentDidMount() {
+    this.getAPI();
+  }
+
+  deleteButton = (note) => {
+    console.log('delete called');
+    console.log(note);
+    fetch(`http://localhost:9090/notes/${note.id}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json'
+      },
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      throw new Error ('something went wrong~ @@@!!!@!@@#');
+    })
+    .then (resJson => { this.getAPI() })
+    .catch(e=> `Your error is ${e}`);
+
+    }
+
 
   render() {
     console.log(this.state);
@@ -61,7 +85,8 @@ export default class App extends Component {
         <Header />
         <Context.Provider value={{
            folders: this.state.store.folders,
-           notes: this.state.store.notes
+           notes: this.state.store.notes,
+           deleteButton: this.deleteButton
         }}>
           <Sidebar>
             <Switch>
